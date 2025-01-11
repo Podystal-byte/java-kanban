@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 
-public class SubTask extends Epic {
+public class SubTask extends Task {
 
+    public SubTask(String name, String description) {
+        super(name, description);
+    }
 }
 
 

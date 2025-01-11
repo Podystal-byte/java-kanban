@@ -1,15 +1,16 @@
 import java.util.HashMap;
 
 public class Task {
+    static int identificator = 0;
+    public int id;
     public String name;
-    public String details;
     public String description;
-    public Status status;
-    public Task(String name, String details, String description, Status status){
+    public  Status status;
+    public Task(String name, String description){
+        this.id = ++identificator;
         this.name = name;
-        this.details = details;
         this.description = description;
-        this.status = status;
+        this.status = Status.NEW;
     }
 }
 
