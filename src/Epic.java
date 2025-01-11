@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Epic {
+public class Epic extends Task {
 
 
 

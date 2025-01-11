@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SubTask {
+public class SubTask extends Epic {
 
 }
 
