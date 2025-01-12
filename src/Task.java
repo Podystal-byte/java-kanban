@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public class Task {
     static int identificator = 0;
     public int id;
@@ -12,5 +10,9 @@ public class Task {
         this.description = description;
         this.status = Status.NEW;
     }
+    public void removeTask(){
+        id = identificator; // добавил этот метод для обновления id в классе TaskManager при отработке метода removeAllTasks
+    }// но он не работает энивей, не совсем понимаю почему
+    // Хотел спросить по поводу статуса, у Task он вообще не должен меняться?
 }
 

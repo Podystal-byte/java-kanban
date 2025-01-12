@@ -1,12 +1,27 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Main {
 
     public static void main(String[] args) {
         Task task = new Task("Готовка", "Выбор ингредиентов и тд");
-        System.out.println("name = "+ task.name+" description =  "+ task.description +"    " + task.id + "   "+ task.status );
+
         Task task1 = new Task("Прогулка", "выйти на улицу");
-        System.out.println("name = "+ task1.name+" description =  "+ task1.description +"    " + task1.id + "   "+ task1.status );
+
+        SubTask subTask = new SubTask("F", "t");
+        SubTask subTask2 = new SubTask("b", "h");
+        TaskManager taskManager = new TaskManager();
+        taskManager.addTask(task);
+        taskManager.addTask(task1);
+
+        taskManager.removeAllTasks();
+        taskManager.printAllTasks();
+        Epic epic = new Epic("Переезд", "Этапы подготовки к переезду");
+        epic.addSubTask(subTask);
+        epic.addSubTask(subTask2);
+        taskManager.addTask(task);
+        taskManager.addTask(epic);
+        taskManager.addTask(subTask);
+        taskManager.printAllTasks();
+
+        Task task2 = new Task("aaa", "bbbb");
+
     }
 }
