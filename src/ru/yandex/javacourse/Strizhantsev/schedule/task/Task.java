@@ -1,3 +1,5 @@
+package ru.yandex.javacourse.Strizhantsev.schedule.task;
+
 import java.util.Objects;
 
 public class Task {

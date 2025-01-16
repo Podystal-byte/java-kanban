@@ -1,3 +1,9 @@
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Task;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Epic;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Status;
+import ru.yandex.javacourse.Strizhantsev.schedule.manager.TaskManager;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -48,3 +54,4 @@ public class Main {
 
     }
 }
+// Спасибо за проверку и за обратную связь

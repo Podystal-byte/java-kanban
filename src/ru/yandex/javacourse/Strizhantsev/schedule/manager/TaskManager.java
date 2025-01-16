@@ -1,3 +1,10 @@
+package ru.yandex.javacourse.Strizhantsev.schedule.manager;
+
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Task;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Epic;
+import ru.yandex.javacourse.Strizhantsev.schedule.task.Status;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
