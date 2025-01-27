@@ -1,5 +1,7 @@
 package ru.yandex.javacourse.strizhantsev.schedule;
 
+import ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
+import ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
 import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
 import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
@@ -9,7 +11,8 @@ import ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager = Managers.getDefault();
+
 
 
         Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW);
@@ -39,26 +42,61 @@ public class Main {
         taskManager.addNewSubtask(subTask2);
         taskManager.addNewSubtask(subTask3);
 
-        System.out.println(taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubTasks());
+        taskManager.findTaskById(1);
+        taskManager.findTaskById(2);
 
-        System.out.println();
-        System.out.println();
-
-        taskManager.updateEpicStatus(epic1);
-        System.out.println(taskManager.getAllEpics());
-
-        System.out.println();
-        System.out.println();
-
-        taskManager.deleteEpic(epic1.getId());
-        taskManager.removeTaskById(task1.getId());
+        printAllTasks(taskManager);
 
 
-        System.out.println(taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubTasks());
 
+
+//        System.out.println(taskManager.getAllTasks());
+//        System.out.println(taskManager.getAllEpics());
+//        System.out.println(taskManager.getAllSubTasks());
+//
+//        System.out.println();
+//        System.out.println();
+//
+//        taskManager.updateEpicStatus(epic1);
+//        System.out.println(taskManager.getAllEpics());
+//
+//        System.out.println();
+//        System.out.println();
+//
+//        taskManager.deleteEpic(epic1.getId());
+//        taskManager.removeTaskById(task1.getId());
+//
+//
+//        System.out.println(taskManager.getAllTasks());
+//        System.out.println(taskManager.getAllEpics());
+//        System.out.println(taskManager.getAllSubTasks());
+//
+
+    }
+    private static void printAllTasks(TaskManager manager) {
+        System.out.println("Задачи:");
+        for (Task task : manager.getAllTasks()) {
+            System.out.println(task);
+        }
+
+        System.out.println("Эпики:");
+        for (Epic epic : manager.getAllEpics()) {
+            System.out.println(epic);
+
+            // Получаем все подзадачи для данного эпика
+            for (SubTask subtask : manager.allSubtasksForEpic(epic)) {
+                System.out.println("--> " + subtask);
+            }
+        }
+
+        System.out.println("Подзадачи:");
+        for (SubTask subtask : manager.getAllSubTasks()) {
+            System.out.println(subtask);
+        }
+
+        System.out.println("История:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
     }
 }// Спасибо за проверку и за обратную связь

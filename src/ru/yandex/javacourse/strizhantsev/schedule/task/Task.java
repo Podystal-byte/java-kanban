@@ -51,8 +51,10 @@ public class Task {
 
     @Override
     public int hashCode() {
-        int iD = 0;
-        return iD++;
+        int hash = 7;
+        hash = 17 * hash + id;
+
+        return hash;
     }
 
     @Override
