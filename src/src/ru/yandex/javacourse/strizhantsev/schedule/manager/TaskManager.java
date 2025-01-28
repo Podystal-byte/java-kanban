@@ -1,10 +1,9 @@
-package ru.yandex.javacourse.strizhantsev.schedule.manager;
+package src.ru.yandex.javacourse.strizhantsev.schedule.manager;
 
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
@@ -14,11 +13,11 @@ public interface TaskManager {
 
     Integer addNewSubtask(SubTask subtask);
 
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
-    ArrayList<SubTask> getAllSubTasks();
+    List<SubTask> getAllSubTasks();
 
     void removeAllTasks();
 
@@ -40,15 +39,13 @@ public interface TaskManager {
 
     void deleteSubtask(int id);
 
-    ArrayList<SubTask> allSubtasksForEpic(Epic epic);
+    List<SubTask> allSubtasksForEpic(Epic epic);
 
     void deleteAllTasks();
 
     void deleteAllSubtasks();
 
     void deleteAllEpics();
-
-    void updateEpicStatus(Epic epic);
 
     List<Task> getHistory();
 }

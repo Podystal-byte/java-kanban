@@ -1,18 +1,16 @@
-package ru.yandex.javacourse.strizhantsev.schedule;
+package src.ru.yandex.javacourse.strizhantsev.schedule;
 
-import ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
-import ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
+import src.ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import src.ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
 
 public class Main {
 
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
-
 
 
         Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW);
@@ -48,8 +46,6 @@ public class Main {
         printAllTasks(taskManager);
 
 
-
-
 //        System.out.println(taskManager.getAllTasks());
 //        System.out.println(taskManager.getAllEpics());
 //        System.out.println(taskManager.getAllSubTasks());
@@ -73,6 +69,7 @@ public class Main {
 //
 
     }
+
     private static void printAllTasks(TaskManager manager) {
         System.out.println("Задачи:");
         for (Task task : manager.getAllTasks()) {

@@ -1,15 +1,18 @@
-package ru.yandex.javacourse.strizhantsev.schedule.history;
+package src.ru.yandex.javacourse.strizhantsev.schedule.history;
 
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
     private final List<Task> history = new ArrayList<>();
+    private final int MAX_SIZE = 10;
+
     @Override
     public void add(Task task) {
-        if (history.size() >= 10) {
+
+        if (history.size() >= MAX_SIZE) {
             history.remove(0);
         }
         history.add(task);

@@ -1,11 +1,13 @@
-package ru.yandex.javacourse.strizhantsev.schedule.manager;
+package test.ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import src.ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
+import src.ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 
 import java.util.List;
 
@@ -100,13 +102,25 @@ public class TaskManagerTest {
         Task originalTask = new Task("History Test Task", "History Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
-        originalTask.setName("Changed Name");
-
         taskManager.findTaskById(id);
+
+        Task updateTask = new Task("Update Task", "Update Description", Status.IN_PROGRESS);
+        updateTask.setId(id);
+        taskManager.updateTask(updateTask);
+        taskManager.findTaskById(id);
+
 
         List<Task> history = taskManager.getHistory();
 
-        assertEquals(originalTask.getName(), history.get(0).getName(),
+        assertEquals(originalTask.getName(), history.getFirst().getName(),
                 "История должна содержать оригинальную версию задачи.");
+        assertEquals(updateTask.getName(), taskManager.findTaskById(id).getName(),
+                "Имя задачи в менеджере должно быть обновлено на новое.");
+
     }
-}
+} // Спасибо большое за ревью
+// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
+// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
+// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
+// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
+// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью

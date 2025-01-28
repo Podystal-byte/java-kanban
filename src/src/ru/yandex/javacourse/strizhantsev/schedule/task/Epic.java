@@ -1,10 +1,11 @@
-package ru.yandex.javacourse.strizhantsev.schedule.task;
+package src.ru.yandex.javacourse.strizhantsev.schedule.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
 
-    private ArrayList<Integer> subtaskIds = new ArrayList<>();
+    private List<Integer> subtaskIds = new ArrayList<>();
 
     public Epic(String name, String description, Status status) {
         super(name, description, status);
@@ -14,8 +15,12 @@ public class Epic extends Task {
         subtaskIds.add(id);
     }
 
-    public ArrayList<Integer> getSubtaskIds() {
+    public List<Integer> getSubtaskIds() {
         return subtaskIds;
+    }
+
+    public void setSubtaskIds(List<Integer> subtaskIds) {
+        this.subtaskIds = subtaskIds;
     }
 
     public void removeSubtask(int id) {

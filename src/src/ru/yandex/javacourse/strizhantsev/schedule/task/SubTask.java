@@ -1,4 +1,4 @@
-package ru.yandex.javacourse.strizhantsev.schedule.task;
+package src.ru.yandex.javacourse.strizhantsev.schedule.task;
 
 public class SubTask extends Task {
     private int epicId;

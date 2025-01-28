@@ -1,22 +1,23 @@
-package ru.yandex.javacourse.strizhantsev.schedule.manager;
+package src.ru.yandex.javacourse.strizhantsev.schedule.manager;
 
-import ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
-import ru.yandex.javacourse.strizhantsev.schedule.history.InMemoryHistoryManager;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import src.ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
+import src.ru.yandex.javacourse.strizhantsev.schedule.history.InMemoryHistoryManager;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, SubTask> subtasks;
+    private final Map<Integer, Task> tasks;
+    private final Map<Integer, Epic> epics;
+    private final Map<Integer, SubTask> subtasks;
     private int generateId;
-    private HistoryManager taskHistoryList;
+    private final HistoryManager taskHistoryList;
 
     public InMemoryTaskManager() {
         this.generateId = 0;
@@ -116,17 +117,13 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateEpic(Epic epic) {
-        Epic savedEpic = epics.get(epic.getId());
+        final Epic savedEpic = epics.get(epic.getId());
         if (savedEpic == null) {
             return;
-
         }
-
-
-        savedEpic.setName(epic.getName());
-        savedEpic.setDescription(epic.getDescription());
-
-
+        epic.setSubtaskIds(savedEpic.getSubtaskIds());
+        epic.setStatus(savedEpic.getStatus());
+        epics.put(epic.getId(), epic);
     }
 
     @Override
@@ -210,9 +207,8 @@ public class InMemoryTaskManager implements TaskManager {
         subtasks.clear(); // Очистка всех подзадач при удалении эпиков
     }
 
-    @Override
-    public void updateEpicStatus(Epic epic) {
-        ArrayList<SubTask> subtasksForEpic = allSubtasksForEpic(epic);
+    private void updateEpicStatus(Epic epic) {
+        List<SubTask> subtasksForEpic = allSubtasksForEpic(epic);
 
         if (subtasksForEpic.isEmpty()) {
             epic.setStatus(Status.NEW);
@@ -240,7 +236,6 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Task> getHistory() {
         return taskHistoryList.getHistory();
     }
-
 
 
 }
