@@ -42,8 +42,14 @@ public class Main {
 
         taskManager.findTaskById(1);
         taskManager.findTaskById(2);
+        taskManager.findSubTaskById(6);
+        taskManager.findSubTaskById(6);
+
+
 
         printAllTasks(taskManager);
+
+
 
 
 //        System.out.println(taskManager.getAllTasks());

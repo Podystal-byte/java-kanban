@@ -98,26 +98,51 @@ public class TaskManagerTest {
     }
 
     @Test
-    void historyPreservesPreviousVersionsOfTasks() {
+    void historyPreservesSingleVersionOfTask() {
         Task originalTask = new Task("History Test Task", "History Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
-        taskManager.findTaskById(id);
+        Task fetchedTask = taskManager.findTaskById(id);
 
-        Task updateTask = new Task("Update Task", "Update Description", Status.IN_PROGRESS);
-        updateTask.setId(id);
-        taskManager.updateTask(updateTask);
-        taskManager.findTaskById(id);
+        assertNotNull(fetchedTask, "Задача должна быть найдена перед обновлением.");
 
+        fetchedTask.setName("Updated Name");
+        taskManager.updateTask(fetchedTask);
+
+        Task updatedTask = taskManager.findTaskById(id);
+
+        assertNotNull(updatedTask, "Задача должна быть найдена после обновления.");
 
         List<Task> history = taskManager.getHistory();
 
-        assertEquals(originalTask.getName(), history.getFirst().getName(),
-                "История должна содержать оригинальную версию задачи.");
-        assertEquals(updateTask.getName(), taskManager.findTaskById(id).getName(),
-                "Имя задачи в менеджере должно быть обновлено на новое.");
+        assertEquals(1, history.size(), "История должна содержать одну версию задачи.");
 
+        assertEquals("Updated Name", history.get(0).getName(),
+                "История должна содержать обновленную версию задачи.");
     }
+
+    @Test
+    void removeFromHistoryWorksCorrectly() {
+        Task task1 = new Task("First Task", "Description A", Status.NEW);
+        int id1 = taskManager.addTask(task1);
+
+        Task task2 = new Task("Second Task", "Description B", Status.NEW);
+        int id2 = taskManager.addTask(task2);
+
+        taskManager.findTaskById(id1);
+        taskManager.findTaskById(id2);
+
+        taskManager.removeTaskById(id1);
+
+        List<Task> historyAfterRemoval = taskManager.getHistory();
+
+        assertEquals(1, historyAfterRemoval.size(), "История должна содержать одну задачу после удаления.");
+
+        assertEquals(task2.getName(), historyAfterRemoval.get(0).getName(),
+                "История должна содержать только вторую задачу.");
+    }
+
+
 } // Спасибо большое за ревью
 // Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
 // Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
