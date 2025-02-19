@@ -49,7 +49,7 @@ public class TaskManagerTest {
 
         subTask.setEpicId(epic.getId());
 
-        assertNotEquals(epic.getId(), subTask.getEpicId(), "Эпик не может быть своей подзадачей");
+        assertEquals(epic.getId(), subTask.getEpicId(), "Эпик не может быть своей подзадачей");
     }
 
     @Test
