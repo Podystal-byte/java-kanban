@@ -1,6 +1,6 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule.history;
+package ru.yandex.javacourse.strizhantsev.schedule.history;
 
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

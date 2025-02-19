@@ -2,12 +2,12 @@ package test.ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
+import ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
 
 import java.util.List;
 

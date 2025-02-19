@@ -1,4 +1,4 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule.task;
+package ru.yandex.javacourse.strizhantsev.schedule.task;
 
 import java.util.ArrayList;
 import java.util.List;

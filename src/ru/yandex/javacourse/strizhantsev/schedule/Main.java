@@ -1,11 +1,11 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule;
+package ru.yandex.javacourse.strizhantsev.schedule;
 
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
+import ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
 
 public class Main {
 
