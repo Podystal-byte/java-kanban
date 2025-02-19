@@ -99,4 +99,4 @@ public class Main {
             System.out.println(task);
         }
     }
-}// Спасибо за проверку и за обратную связь
+}
