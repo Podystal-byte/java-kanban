@@ -47,7 +47,7 @@ public class Main {
 
 
         printAllTasks(taskManager);
-
+        // Наконец-то разобрался как сделать правильную директорию
 
 //        System.out.println(taskManager.getAllTasks());
 //        System.out.println(taskManager.getAllEpics());
