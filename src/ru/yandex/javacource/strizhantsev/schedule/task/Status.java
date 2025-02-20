@@ -1,4 +1,4 @@
-package ru.yandex.javacourse.strizhantsev.schedule.task;
+package ru.yandex.javacource.strizhantsev.schedule.task;
 
 public enum Status {
     NEW,

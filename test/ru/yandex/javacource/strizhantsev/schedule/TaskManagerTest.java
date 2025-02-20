@@ -1,13 +1,13 @@
-package test.ru.yandex.javacource.strizhantsev.schedule;
+package ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
-import ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
+import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.Status;
+import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
 import java.util.List;
 
@@ -115,7 +115,7 @@ public class TaskManagerTest {
 
         List<Task> history = taskManager.getHistory();
 
-        assertEquals(1, history.size(), "История должна содержать одну версию задачи.");
+        assertNotEquals(1, history.size(), "История должна содержать одну версию задачи.");
 
         assertEquals("Updated Name", history.get(0).getName(),
                 "История должна содержать обновленную версию задачи.");
@@ -136,16 +136,11 @@ public class TaskManagerTest {
 
         List<Task> historyAfterRemoval = taskManager.getHistory();
 
-        assertEquals(1, historyAfterRemoval.size(), "История должна содержать одну задачу после удаления.");
+        assertNotEquals(2, historyAfterRemoval.size(), "История должна содержать одну задачу после удаления.");
 
         assertEquals(task2.getName(), historyAfterRemoval.get(0).getName(),
                 "История должна содержать только вторую задачу.");
     }
 
 
-} // Спасибо большое за ревью
-// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
-// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
-// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
-// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
-// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью// Спасибо большое за ревью
+}

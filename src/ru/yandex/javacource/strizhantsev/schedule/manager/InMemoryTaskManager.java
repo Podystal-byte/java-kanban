@@ -1,11 +1,11 @@
-package ru.yandex.javacourse.strizhantsev.schedule.manager;
+package ru.yandex.javacource.strizhantsev.schedule.manager;
 
-import ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
-import ru.yandex.javacourse.strizhantsev.schedule.history.InMemoryHistoryManager;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.history.HistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.history.InMemoryHistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.Status;
+import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

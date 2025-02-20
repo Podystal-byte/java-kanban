@@ -1,2 +1,0 @@
-./src/test/java/ru/yandex/javacourse/strizhantsev/schedule/EpicTest.java
-./src/test/java/ru/yandex/javacourse/strizhantsev/schedule/TaskManagerTest.java

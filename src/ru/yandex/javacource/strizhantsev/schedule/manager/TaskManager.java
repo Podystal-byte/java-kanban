@@ -1,8 +1,8 @@
-package ru.yandex.javacourse.strizhantsev.schedule.manager;
+package ru.yandex.javacource.strizhantsev.schedule.manager;
 
-import ru.yandex.javacourse.strizhantsev.schedule.task.Task;
-import ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacource.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 
 import java.util.List;
 
