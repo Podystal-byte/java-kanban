@@ -1,11 +1,11 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule;
+package ru.yandex.javacource.strizhantsev.schedule;
 
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.Managers;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import src.ru.yandex.javacourse.strizhantsev.schedule.manager.TaskManager;
+import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
+import ru.yandex.javacource.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.Status;
+import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 
 public class Main {
 
@@ -42,9 +42,12 @@ public class Main {
 
         taskManager.findTaskById(1);
         taskManager.findTaskById(2);
+        taskManager.findSubTaskById(6);
+        taskManager.findSubTaskById(6);
+
 
         printAllTasks(taskManager);
-
+        // Наконец-то разобрался как сделать правильную директорию
 
 //        System.out.println(taskManager.getAllTasks());
 //        System.out.println(taskManager.getAllEpics());
@@ -96,4 +99,4 @@ public class Main {
             System.out.println(task);
         }
     }
-}// Спасибо за проверку и за обратную связь
+}

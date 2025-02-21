@@ -1,11 +1,11 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule.manager;
+package ru.yandex.javacource.strizhantsev.schedule.manager;
 
-import src.ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
-import src.ru.yandex.javacourse.strizhantsev.schedule.history.InMemoryHistoryManager;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.SubTask;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.history.HistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.history.InMemoryHistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.Status;
+import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
+import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,11 +148,13 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void removeTaskById(int id) {
         tasks.remove(id);
+        taskHistoryList.remove(id);
     }
 
     @Override
     public void deleteEpic(int id) {
         Epic epic = epics.remove(id);
+        taskHistoryList.remove(id);
         if (epic != null) {
             for (Integer subtaskId : epic.getSubtaskIds()) {
                 subtasks.remove(subtaskId);
@@ -163,6 +165,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteSubtask(int id) {
         SubTask subtask = subtasks.remove(id);
+        taskHistoryList.remove(id);
         if (subtask != null) {
             Epic epic = epics.get(subtask.getEpicId());
             if (epic != null) {

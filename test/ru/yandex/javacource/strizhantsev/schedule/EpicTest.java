@@ -1,9 +1,9 @@
-package test.ru.yandex.javacource.strizhantsev.schedule;
+package ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach; // Изменено на BeforeEach
 import org.junit.jupiter.api.Test;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Epic;
-import src.ru.yandex.javacourse.strizhantsev.schedule.task.Status;
+import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
+import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 
 import static org.junit.jupiter.api.Assertions.*;
 

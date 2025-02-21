@@ -1,7 +1,7 @@
-package src.ru.yandex.javacourse.strizhantsev.schedule.manager;
+package ru.yandex.javacource.strizhantsev.schedule.manager;
 
-import src.ru.yandex.javacourse.strizhantsev.schedule.history.HistoryManager;
-import src.ru.yandex.javacourse.strizhantsev.schedule.history.InMemoryHistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.history.HistoryManager;
+import ru.yandex.javacource.strizhantsev.schedule.history.InMemoryHistoryManager;
 
 public class Managers {
 
