@@ -9,6 +9,7 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,7 +68,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void inMemoryTaskManagerAddsAndFindsTasks() {
+    void inMemoryTaskManagerAddsAndFindsTasks() throws IOException {
         Task task = new Task("Test Task", "Test Description", Status.NEW);
         int id = taskManager.addTask(task);
 
@@ -75,7 +76,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void noConflictBetweenTasksWithSameIds() {
+    void noConflictBetweenTasksWithSameIds() throws IOException {
         Task task1 = new Task("First Task", "Description A", Status.NEW);
         int id = taskManager.addTask(task1);
 
@@ -86,7 +87,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void taskVariabilityTest() {
+    void taskVariabilityTest() throws IOException {
         Task originalTask = new Task("Original Task", "Original Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
@@ -98,7 +99,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void historyPreservesSingleVersionOfTask() {
+    void historyPreservesSingleVersionOfTask() throws IOException {
         Task originalTask = new Task("History Test Task", "History Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
@@ -122,7 +123,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void removeFromHistoryWorksCorrectly() {
+    void removeFromHistoryWorksCorrectly() throws IOException {
         Task task1 = new Task("First Task", "Description A", Status.NEW);
         int id1 = taskManager.addTask(task1);
 

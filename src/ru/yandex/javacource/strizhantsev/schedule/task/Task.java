@@ -8,12 +8,18 @@ public class Task {
     private String name;
     private String description;
     private Status status;
+    private TypeTask typeTask;
 
     public Task(String name, String description, Status status) {
 
         this.name = name;
         this.description = description;
         this.status = status;
+        this.typeTask = TypeTask.TASK;
+    }
+
+    public TypeTask getTypeTask() {
+        return typeTask;
     }
 
     public int getId() {
@@ -68,7 +74,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "id = " + id + ", " + "name = " + name + ", " + "description = " + description + ", " + "status = " + status + ".";
+        return id + "," + typeTask + "," + name + "," + description + "," + status;
     }
 }
 

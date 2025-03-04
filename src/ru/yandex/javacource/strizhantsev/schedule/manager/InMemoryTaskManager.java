@@ -7,6 +7,7 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int addTask(Task task) {
+    public int addTask(Task task) throws IOException {
         int id = ++generateId;
         task.setId(id);
         tasks.put(id, task);
@@ -36,7 +37,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int addEpic(Epic epic) {
+    public int addEpic(Epic epic) throws IOException {
         int epicId = ++generateId;
         epic.setId(epicId);
         epics.put(epicId, epic);
@@ -44,7 +45,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Integer addNewSubtask(SubTask subtask) {
+    public Integer addNewSubtask(SubTask subtask) throws IOException {
         int epicId = subtask.getEpicId();
         Epic epic = epics.get(epicId);
         if (epic == null) {
@@ -239,6 +240,8 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Task> getHistory() {
         return taskHistoryList.getHistory();
     }
+
+
 
 
 }

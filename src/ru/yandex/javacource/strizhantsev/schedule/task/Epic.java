@@ -6,9 +6,11 @@ import java.util.List;
 public class Epic extends Task {
 
     private List<Integer> subtaskIds = new ArrayList<>();
+    private TypeTask typeTask;
 
     public Epic(String name, String description, Status status) {
         super(name, description, status);
+        this.typeTask = TypeTask.EPIC;
     }
 
     public void addSubtaskId(int id) {
@@ -29,5 +31,10 @@ public class Epic extends Task {
 
     public void cleanSubtaskIds() {
         subtaskIds.clear();
+    }
+
+    @Override
+    public String toString() {
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus();
     }
 }
