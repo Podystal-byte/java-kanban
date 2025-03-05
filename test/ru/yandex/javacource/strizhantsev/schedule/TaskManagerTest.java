@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskManagerTest {
-    private TaskManager taskManager;
+    private FileBackedTaskManager taskManager;
     Path filePath;
     private File file;
 
@@ -163,7 +163,8 @@ public class TaskManagerTest {
         taskManager.addTask(task2);
         taskManager.addEpic(epic);
 
-        StringBuilder cont = new StringBuilder();
+        taskManager.save();
+
         String content = new String(Files.readAllBytes(file.toPath()));
         assertNotNull(content);
         assertTrue(content.contains("Task1"));
@@ -181,6 +182,8 @@ public class TaskManagerTest {
         taskManager.addTask(task1);
         taskManager.addTask(task2);
         taskManager.addEpic(epic);
+
+        taskManager.save();
 
 
         FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);

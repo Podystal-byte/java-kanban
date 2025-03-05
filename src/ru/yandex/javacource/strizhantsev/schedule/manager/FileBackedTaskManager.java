@@ -37,12 +37,11 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return subtask.getId();
     }
 
-    private void save() throws IOException {
+    public void save() throws IOException {
         Path filePath = Paths.get(FILE_PATH);
         try {
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
-                System.out.println("Файл создан.");
             }
 
             StringBuilder content = new StringBuilder("id,type,name,description,status,epicId\n"); // Заголовок
@@ -61,9 +60,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
             throw new ManagerSaveException("Проблема с сохранением данных");
         }
     }
+
+
 
     public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager manager = new FileBackedTaskManager();
