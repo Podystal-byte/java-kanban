@@ -1,6 +1,5 @@
 package ru.yandex.javacource.strizhantsev.schedule;
 
-import ru.yandex.javacource.strizhantsev.schedule.history.HistoryManager;
 import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
@@ -10,11 +9,9 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+
 
 public class Main {
 
@@ -24,11 +21,9 @@ public class Main {
         FileBackedTaskManager taskManager = Managers.getFileBacked();
         Path filePath = Paths.get(FileBackedTaskManager.FILE_PATH);
         File file = filePath.toFile();
-        taskManager.save();
+
 
         FileBackedTaskManager.loadFromFile(file);
-
-        taskManager.save();
 
         Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW);
         Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW);

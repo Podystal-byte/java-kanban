@@ -2,6 +2,7 @@ package ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
@@ -9,17 +10,25 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskManagerTest {
     private TaskManager taskManager;
+    Path filePath;
+    private File file;
 
     @BeforeEach
     void setTaskManager() {
-        taskManager = Managers.getDefault();
+        taskManager = Managers.getFileBacked();
+        filePath = Paths.get(FileBackedTaskManager.FILE_PATH);
+        file = filePath.toFile();
     }
 
     @Test
@@ -141,6 +150,44 @@ public class TaskManagerTest {
 
         assertEquals(task2.getName(), historyAfterRemoval.get(0).getName(),
                 "История должна содержать только вторую задачу.");
+    }
+
+    @Test
+    void saveTasks() throws IOException {
+        Task task1 = new Task("Task1", "Description1", Status.NEW);
+        Task task2 = new Task("Task2", "Description2", Status.DONE);
+        Epic epic = new Epic("Epic1", "Description3", Status.NEW);
+
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+        taskManager.addEpic(epic);
+
+        StringBuilder cont = new StringBuilder();
+        String content = new String(Files.readAllBytes(file.toPath()));
+        assertNotNull(content);
+        assertTrue(content.contains("Task1"));
+        assertTrue(content.contains("Task2"));
+        assertTrue(content.contains("Epic1"));
+    }
+
+    @Test
+    void loadFromFile() throws IOException {
+        Task task1 = new Task("Task1", "Description1", Status.NEW);
+        Task task2 = new Task("Task2", "Description2", Status.DONE);
+        Epic epic = new Epic("Epic1", "Description3", Status.NEW);
+
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+        taskManager.addEpic(epic);
+
+
+        FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);
+
+        for (Task task : loadedManager.getAllTasks()) {
+            assertTrue(taskManager.getAllTasks().contains(task));
+        }
     }
 
 

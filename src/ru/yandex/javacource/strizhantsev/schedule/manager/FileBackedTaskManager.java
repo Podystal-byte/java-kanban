@@ -10,12 +10,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+
 
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     public static final String FILE_NAME = "tasks.txt";
-    public static final String FILE_PATH = "C:/Users/user/IdeaProjects/java-kanban/src/ru/yandex/javacource/strizhantsev/schedule/" + FILE_NAME;
+    public static final String FILE_PATH = "C:/Users/user/IdeaProjects/java-kanban/resources/" + FILE_NAME;
 
     @Override
     public int addTask(Task task) throws IOException {
@@ -38,7 +38,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return subtask.getId();
     }
 
-    public void save() throws IOException {
+    private void save() throws IOException {
         Path filePath = Paths.get(FILE_PATH);
         try {
             if (!Files.exists(filePath)) {
