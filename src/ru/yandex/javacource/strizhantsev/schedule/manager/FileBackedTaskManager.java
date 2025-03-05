@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     public static final String FILE_NAME = "tasks.txt";
-    public static final String FILE_PATH = "C:/Users/user/IdeaProjects/java-kanban/resources/" + FILE_NAME;
+    public static String FILE_PATH = "./resources/" + FILE_NAME;
 
     @Override
     public int addTask(Task task) throws IOException {
@@ -42,6 +42,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         try {
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
+                System.out.println("Файл создан.");
             }
 
             StringBuilder content = new StringBuilder("id,type,name,description,status,epicId\n"); // Заголовок
@@ -60,11 +61,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
             throw new ManagerSaveException("Проблема с сохранением данных");
         }
     }
-
 
 
     public static FileBackedTaskManager loadFromFile(File file) {

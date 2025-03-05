@@ -1,5 +1,6 @@
 package ru.yandex.javacource.strizhantsev.schedule;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
@@ -21,14 +22,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskManagerTest {
     private FileBackedTaskManager taskManager;
-    Path filePath;
     private File file;
 
     @BeforeEach
-    void setTaskManager() {
-        taskManager = Managers.getFileBacked();
-        filePath = Paths.get(FileBackedTaskManager.FILE_PATH);
-        file = filePath.toFile();
+    void setUp() throws IOException {
+        file = File.createTempFile("test", ".txt"); // Используем временный файл
+        taskManager = new FileBackedTaskManager();
+        FileBackedTaskManager.FILE_PATH = file.getAbsolutePath(); // Устанавливаем путь к временному файлу
+    }
+
+    @AfterEach
+    void tearDown() {
+        file.delete();
     }
 
     @Test
