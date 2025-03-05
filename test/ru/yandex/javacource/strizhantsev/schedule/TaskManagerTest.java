@@ -26,9 +26,9 @@ public class TaskManagerTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        file = File.createTempFile("test", ".txt"); // Используем временный файл
+        file = File.createTempFile("test", ".txt");
         taskManager = new FileBackedTaskManager();
-        FileBackedTaskManager.FILE_PATH = file.getAbsolutePath(); // Устанавливаем путь к временному файлу
+        FileBackedTaskManager.FILE_PATH = file.getAbsolutePath();
     }
 
     @AfterEach
@@ -168,7 +168,6 @@ public class TaskManagerTest {
         taskManager.addTask(task2);
         taskManager.addEpic(epic);
 
-        taskManager.save();
 
         String content = new String(Files.readAllBytes(file.toPath()));
         assertNotNull(content);
@@ -188,7 +187,6 @@ public class TaskManagerTest {
         taskManager.addTask(task2);
         taskManager.addEpic(epic);
 
-        taskManager.save();
 
 
         FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);
