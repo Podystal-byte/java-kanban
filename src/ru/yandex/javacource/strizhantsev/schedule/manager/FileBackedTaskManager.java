@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-
 public class FileBackedTaskManager extends InMemoryTaskManager {
     public static final String FILE_NAME = "tasks.txt";
     public static final String FILE_PATH = "C:/Users/user/IdeaProjects/java-kanban/resources/" + FILE_NAME;
