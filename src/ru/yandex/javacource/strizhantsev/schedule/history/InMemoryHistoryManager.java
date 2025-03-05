@@ -13,11 +13,11 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node tail;
 
     @Override
-    public void add(Task task)  {
+    public void add(Task task) {
         try {
             linkLast(task);
             history.put(task.getId(), tail);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Пытаетесь добавить пустую задачу");
         }
 
