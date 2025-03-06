@@ -4,14 +4,15 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface TaskManager {
-    int addTask(Task task);
+    int addTask(Task task) throws IOException;
 
-    int addEpic(Epic epic);
+    int addEpic(Epic epic) throws IOException;
 
-    Integer addNewSubtask(SubTask subtask);
+    Integer addNewSubtask(SubTask subtask) throws IOException;
 
     List<Task> getAllTasks();
 

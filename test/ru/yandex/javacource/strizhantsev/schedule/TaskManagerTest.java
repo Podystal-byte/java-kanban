@@ -1,7 +1,9 @@
 package ru.yandex.javacource.strizhantsev.schedule;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
@@ -9,16 +11,29 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskManagerTest {
-    private TaskManager taskManager;
+    private FileBackedTaskManager taskManager;
+    private File file;
 
     @BeforeEach
-    void setTaskManager() {
-        taskManager = Managers.getDefault();
+    void setUp() throws IOException {
+        file = File.createTempFile("test", ".txt");
+        taskManager = new FileBackedTaskManager();
+        FileBackedTaskManager.FILE_PATH = file.getAbsolutePath();
+    }
+
+    @AfterEach
+    void tearDown() {
+        file.delete();
     }
 
     @Test
@@ -67,7 +82,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void inMemoryTaskManagerAddsAndFindsTasks() {
+    void inMemoryTaskManagerAddsAndFindsTasks() throws IOException {
         Task task = new Task("Test Task", "Test Description", Status.NEW);
         int id = taskManager.addTask(task);
 
@@ -75,7 +90,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void noConflictBetweenTasksWithSameIds() {
+    void noConflictBetweenTasksWithSameIds() throws IOException {
         Task task1 = new Task("First Task", "Description A", Status.NEW);
         int id = taskManager.addTask(task1);
 
@@ -86,7 +101,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void taskVariabilityTest() {
+    void taskVariabilityTest() throws IOException {
         Task originalTask = new Task("Original Task", "Original Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
@@ -98,7 +113,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void historyPreservesSingleVersionOfTask() {
+    void historyPreservesSingleVersionOfTask() throws IOException {
         Task originalTask = new Task("History Test Task", "History Description", Status.NEW);
         int id = taskManager.addTask(originalTask);
 
@@ -122,7 +137,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    void removeFromHistoryWorksCorrectly() {
+    void removeFromHistoryWorksCorrectly() throws IOException {
         Task task1 = new Task("First Task", "Description A", Status.NEW);
         int id1 = taskManager.addTask(task1);
 
@@ -142,5 +157,42 @@ public class TaskManagerTest {
                 "История должна содержать только вторую задачу.");
     }
 
+    @Test
+    void saveTasks() throws IOException {
+        Task task1 = new Task("Task1", "Description1", Status.NEW);
+        Task task2 = new Task("Task2", "Description2", Status.DONE);
+        Epic epic = new Epic("Epic1", "Description3", Status.NEW);
 
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+        taskManager.addEpic(epic);
+
+
+        String content = new String(Files.readAllBytes(file.toPath()));
+        assertNotNull(content);
+        assertTrue(content.contains("Task1"));
+        assertTrue(content.contains("Task2"));
+        assertTrue(content.contains("Epic1"));
+    }
+
+    @Test
+    void loadFromFile() throws IOException {
+        Task task1 = new Task("Task1", "Description1", Status.NEW);
+        Task task2 = new Task("Task2", "Description2", Status.DONE);
+        Epic epic = new Epic("Epic1", "Description3", Status.NEW);
+
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+        taskManager.addEpic(epic);
+
+
+
+        FileBackedTaskManager loadedManager = FileBackedTaskManager.loadFromFile(file);
+
+        for (Task task : loadedManager.getAllTasks()) {
+            assertTrue(taskManager.getAllTasks().contains(task));
+        }
+    }
 }

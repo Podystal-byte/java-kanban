@@ -14,8 +14,13 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        linkLast(task);
-        history.put(task.getId(), tail);
+        try {
+            linkLast(task);
+            history.put(task.getId(), tail);
+        } catch (NullPointerException e) {
+            System.out.println("Пытаетесь добавить пустую задачу");
+        }
+
     }
 
     private void linkLast(Task task) {
