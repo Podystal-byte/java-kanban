@@ -1,6 +1,12 @@
 package ru.yandex.javacource.strizhantsev.schedule.task;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Task {
 
@@ -9,13 +15,23 @@ public class Task {
     private String description;
     private Status status;
     private TypeTask typeTask;
+    private Duration duration = Duration.ofMinutes(15);
+    private LocalDateTime startTime;
+
 
     public Task(String name, String description, Status status) {
-
         this.name = name;
         this.description = description;
         this.status = status;
         this.typeTask = TypeTask.TASK;
+    }
+
+    public Task(String name, String description, Status status, LocalDateTime startTime) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.typeTask = TypeTask.TASK;
+        this.startTime = startTime;
     }
 
     public TypeTask getTypeTask() {
@@ -53,6 +69,24 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime(){
+        LocalDateTime endTime = LocalDateTime.of(startTime.toLocalDate(), startTime.toLocalTime()).plus(duration);
+        Optional<LocalDateTime> optionalEndtime = Optional.of(endTime);
+        LocalDateTime result = optionalEndtime.orElseGet(() -> {
+            System.out.println("Время не указано.");
+            return null;
+        });
+        return optionalEndtime.get();
     }
 
     @Override
