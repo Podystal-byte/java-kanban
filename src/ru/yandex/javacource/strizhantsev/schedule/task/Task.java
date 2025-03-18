@@ -79,14 +79,15 @@ public class Task {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime(){
-        LocalDateTime endTime = LocalDateTime.of(startTime.toLocalDate(), startTime.toLocalTime()).plus(duration);
-        Optional<LocalDateTime> optionalEndtime = Optional.of(endTime);
-        LocalDateTime result = optionalEndtime.orElseGet(() -> {
-            System.out.println("Время не указано.");
-            return null;
-        });
-        return optionalEndtime.get();
+    public LocalDateTime getEndTime() throws NullPointerException {
+        Optional<LocalDateTime> optionalStartTime = Optional.of(startTime);
+        if (optionalStartTime.isPresent()){
+            LocalDateTime endTime = LocalDateTime.of(startTime.toLocalDate(), startTime.toLocalTime()).plus(duration);
+            return endTime;
+        }
+
+       return null;
+
     }
 
     @Override

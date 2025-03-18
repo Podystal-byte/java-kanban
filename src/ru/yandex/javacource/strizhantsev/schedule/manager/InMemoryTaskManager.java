@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    private Scanner scanner = new Scanner(System.in);
     private final Map<Integer, Task> tasks;
     private final Map<Integer, Epic> epics;
     private final Map<Integer, SubTask> subtasks;
@@ -31,6 +30,9 @@ public class InMemoryTaskManager implements TaskManager {
     public int addTask(Task task) throws IOException {
         int id = ++generateId;
         task.setId(id);
+        if (task.getStartTime() == null){
+            return id;
+        }
         tasks.put(id, task);
         return id;
     }
@@ -232,6 +234,24 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setStatus(Status.IN_PROGRESS);
         } else {
             epic.setStatus(Status.NEW);
+        }
+    }
+
+    public void setEpicStartTime(Epic epic){
+        List<SubTask> subTaskList = new ArrayList<>();
+        for (SubTask subTask: subtasks.values()){
+            if (subTask.getEpicId() == epic.getId()){
+                subTaskList.add(subTask);
+            }
+        }
+
+        for (SubTask subTask: subTaskList){
+            if (epic.getStartTime() == null){
+                epic.setStartTime(subTask.getStartTime());
+            }
+            if (subTask.getStartTime().isBefore(epic.getStartTime())){
+                epic.setStartTime(subTask.getStartTime());
+            }
         }
     }
 

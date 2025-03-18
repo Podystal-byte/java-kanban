@@ -1,5 +1,7 @@
 package ru.yandex.javacource.strizhantsev.schedule.task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,9 @@ public class Epic extends Task {
 
     private List<Integer> subtaskIds = new ArrayList<>();
     private TypeTask typeTask;
+    private LocalDateTime startTime;
+    private Duration duration;
+
 
     public Epic(String name, String description, Status status) {
         super(name, description, status);

@@ -20,19 +20,14 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //TaskManager taskManager = Managers.getFileBacked();
 
-        TaskManager taskManager = Managers.getDefault();
-        Path filePath = Paths.get(FileBackedTaskManager.FILE_PATH);
-        File file = filePath.toFile();
+        TaskManager taskManager = Managers.getFileBacked();
 
-        FileBackedTaskManager.loadFromFile(file);
-
-        printAllTasks(FileBackedTaskManager.loadFromFile(file));
 
 
 
         Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW, LocalDateTime.of(2025,11, 11, 12, 20));
         Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW, LocalDateTime.of(2023,11, 11, 12, 20));
-        Task task217 = new Task("name", "descr", Status.NEW, LocalDateTime.of(2024,11, 11, 12, 20));
+        Task task217 = new Task("name", "descr", Status.NEW);
         Task task216 = new Task("n", "d", Status.NEW, LocalDateTime.of(2025,7, 11, 12, 20));
 
 
@@ -40,8 +35,9 @@ public class Main {
         Epic epic2 = new Epic("Построить дом", "Описание эпик 2", Status.NEW);
 
 
-//        SubTask subTask2 = new SubTask("Лук", "купить лук", Status.IN_PROGRESS);
-//        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS);
+
+
+        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS, LocalDateTime.now());
 //        SubTask subTask4 = new SubTask("r  ", "1    ", Status.NEW);
 
         taskManager.addTask(task216);
@@ -54,7 +50,7 @@ public class Main {
         taskManager.addTask(task217);
 
 //
-//        subTask2.setEpicId(epic1.getId());
+        subTask3.setEpicId(epic1.getId());
 //        subTask3.setEpicId(epic2.getId());
 //        subTask4.setEpicId(epic2.getId());
 
@@ -63,7 +59,7 @@ public class Main {
 //        taskManager.addNewSubtask(subTask3);
 //        taskManager.addNewSubtask(subTask4);
 
-        System.out.println(task1.getEndTime());
+        System.out.println(subTask3.getEndTime());
 
         System.out.println("-------------------------------------------------------");
 
