@@ -5,6 +5,7 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
@@ -49,4 +50,6 @@ public interface TaskManager {
     void deleteAllEpics();
 
     List<Task> getHistory();
+
+    ArrayList<Task> getPrioritizedTasks();
 }

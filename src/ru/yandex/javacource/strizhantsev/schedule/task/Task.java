@@ -15,8 +15,9 @@ public class Task {
     private String description;
     private Status status;
     private TypeTask typeTask;
-    private Duration duration = Duration.ofMinutes(15);
-    private LocalDateTime startTime;
+    Duration duration;
+    LocalDateTime startTime;
+    LocalDateTime endTime;
 
 
     public Task(String name, String description, Status status) {
@@ -26,12 +27,14 @@ public class Task {
         this.typeTask = TypeTask.TASK;
     }
 
-    public Task(String name, String description, Status status, LocalDateTime startTime) {
+    public Task(String name, String description, Status status, LocalDateTime startTime, Duration duration) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.typeTask = TypeTask.TASK;
         this.startTime = startTime;
+        this.duration = duration;
+        this.endTime = (startTime != null && duration != null) ? startTime.plus(duration) : null;
     }
 
     public TypeTask getTypeTask() {
@@ -79,15 +82,25 @@ public class Task {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() throws NullPointerException {
-        Optional<LocalDateTime> optionalStartTime = Optional.of(startTime);
-        if (optionalStartTime.isPresent()){
-            LocalDateTime endTime = LocalDateTime.of(startTime.toLocalDate(), startTime.toLocalTime()).plus(duration);
-            return endTime;
-        }
+    public Duration getDuration() {
+        return duration;
+    }
 
-       return null;
+    public void setDuration(long minDur) {
+        this.duration = Duration.ofMinutes(minDur);
+    }
 
+    public LocalDateTime getEndTime() {
+        return endTime = startTime.plus(duration);
+    }
+
+    public long getDurationInMinute() {
+        long minute = getDuration().toMinutes();
+        return minute;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -109,7 +122,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + typeTask + "," + name + "," + description + "," + status;
+        return id + "," + typeTask + "," + name + "," + description + "," + status + "," + startTime + "," + duration + "," + endTime;
     }
 }
 

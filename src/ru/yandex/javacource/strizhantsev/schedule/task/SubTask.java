@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 public class SubTask extends Task {
     private int epicId;
     private TypeTask typeTask;
-    private LocalDateTime startTime;
-    private Duration duration = Duration.ofMinutes(15);
+
+
 
     public SubTask(String name, String description, Status status) {
         super(name, description, status);
@@ -15,10 +15,9 @@ public class SubTask extends Task {
 
     }
 
-    public SubTask(String name, String description, Status status, LocalDateTime startTime) {
-        super(name, description, status, startTime);
+    public SubTask(String name, String description, Status status, LocalDateTime startTime, Duration duration) {
+        super(name, description, status, startTime, duration);
         this.typeTask = TypeTask.SUBTASK;
-        this.startTime = startTime;
     }
 
     public int getEpicId() {
@@ -31,7 +30,7 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId();
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId()+ this.startTime + "," + this.duration + "," + this.endTime;
     }
 }
 

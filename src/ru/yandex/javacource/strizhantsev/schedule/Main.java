@@ -12,6 +12,7 @@ import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 
@@ -20,55 +21,51 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //TaskManager taskManager = Managers.getFileBacked();
 
-        TaskManager taskManager = Managers.getFileBacked();
+        TaskManager taskManager = Managers.getDefault();
 
 
 
 
-        Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW, LocalDateTime.of(2025,11, 11, 12, 20));
-        Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW, LocalDateTime.of(2023,11, 11, 12, 20));
-        Task task217 = new Task("name", "descr", Status.NEW);
-        Task task216 = new Task("n", "d", Status.NEW, LocalDateTime.of(2025,7, 11, 12, 20));
-
+        Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW, LocalDateTime.of(2025,11, 11, 12, 20), Duration.ofMinutes(10));
+        Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW, LocalDateTime.of(2023,11, 11, 12, 20),Duration.ofMinutes(10));
+        Task task216 = new Task("n", "d", Status.NEW, LocalDateTime.of(2025,7, 11, 12, 20), Duration.ofMinutes(10));
 
         Epic epic1 = new Epic("Купить продукты", "Пойти в магазин", Status.NEW);
-        Epic epic2 = new Epic("Построить дом", "Описание эпик 2", Status.NEW);
 
-
-
-
-        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS, LocalDateTime.now());
-//        SubTask subTask4 = new SubTask("r  ", "1    ", Status.NEW);
+        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS, LocalDateTime.of(2026, 1, 13, 0, 5), Duration.ofMinutes(25));
+        SubTask subTask4 = new SubTask("r  ", "1    ", Status.NEW, LocalDateTime.of(2025, 1, 2, 3, 4), Duration.ofMinutes(20));
 
         taskManager.addTask(task216);
         taskManager.addTask(task1);
         taskManager.addTask(task2);
 
         taskManager.addEpic(epic1);
-        taskManager.addEpic(epic2);
 
-        taskManager.addTask(task217);
+
 
 //
         subTask3.setEpicId(epic1.getId());
 //        subTask3.setEpicId(epic2.getId());
-//        subTask4.setEpicId(epic2.getId());
+        subTask4.setEpicId(epic1.getId());
 
 
 //        taskManager.addNewSubtask(subTask2);
-//        taskManager.addNewSubtask(subTask3);
-//        taskManager.addNewSubtask(subTask4);
+        taskManager.addNewSubtask(subTask3);
+        taskManager.addNewSubtask(subTask4);
 
-        System.out.println(subTask3.getEndTime());
+        System.out.println(epic1.getDuration());
+        System.out.println(epic1.getStartTime());
+        System.out.println(epic1.getEndTime());
+
+
 
         System.out.println("-------------------------------------------------------");
 
-        taskManager.findTaskById(1);
-        taskManager.findTaskById(2);
-//        taskManager.findSubTaskById(7);
-//        taskManager.findSubTaskById(8);
 
 
+
+        System.out.println(taskManager.findEpicById(4));
+        System.out.println(taskManager.getPrioritizedTasks());
 
 
     }
