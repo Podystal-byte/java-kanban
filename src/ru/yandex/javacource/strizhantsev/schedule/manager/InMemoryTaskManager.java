@@ -9,6 +9,8 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class InMemoryTaskManager implements TaskManager {
@@ -18,7 +20,13 @@ public class InMemoryTaskManager implements TaskManager {
     private int generateId;
     private final HistoryManager taskHistoryList;
     private TreeSet<Task> sortedSet;
-    Comparator<Task> comparator = Comparator.comparing(Task::getStartTime);
+    Comparator<Task> comparator = (t1, t2) -> {
+        int sTime = t1.getStartTime().compareTo(t2.getStartTime());
+        if (sTime == 0){
+            return Integer.compare(t1.getId(), t2.getId());
+        }
+        return sTime;
+    };
 
     public InMemoryTaskManager() {
         this.sortedSet = new TreeSet<>(comparator);
@@ -264,10 +272,18 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public ArrayList<Task> getPrioritizedTasks(){
-        sortedSet.addAll(getAllTasks());
-        sortedSet.addAll(getAllEpics());
-        sortedSet.addAll(getAllSubTasks());
-
+        List<Task> allTask = getAllTasks().stream()
+                .filter(task -> !(task.getStartTime() == null))
+                .toList();
+        List<SubTask> allSubTask = getAllSubTasks().stream().
+                filter(subTask -> !(subTask.getStartTime() == null))
+                .toList();
+        List<Epic> allEpic = getAllEpics().stream()
+                .filter(epic -> !(epic.getStartTime() == null))
+                .toList();
+        sortedSet.addAll(allTask);
+        sortedSet.addAll(allSubTask);
+        sortedSet.addAll(allEpic);
         return new ArrayList<>(sortedSet);
     }
 
