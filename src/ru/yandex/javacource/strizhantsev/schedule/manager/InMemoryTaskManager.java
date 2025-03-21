@@ -285,8 +285,8 @@ public class InMemoryTaskManager implements TaskManager {
         List<Task> allTask = getAllTasks().stream()
                 .filter(task -> !(task.getStartTime() == null))
                 .toList();
-        List<SubTask> allSubTask = getAllSubTasks().stream().
-                filter(subTask -> !(subTask.getStartTime() == null))
+        List<SubTask> allSubTask = getAllSubTasks().stream()
+                .filter(subTask -> !(subTask.getStartTime() == null))
                 .toList();
         List<Epic> allEpic = getAllEpics().stream()
                 .filter(epic -> !(epic.getStartTime() == null))
