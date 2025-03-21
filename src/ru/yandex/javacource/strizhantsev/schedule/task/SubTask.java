@@ -8,7 +8,6 @@ public class SubTask extends Task {
     private TypeTask typeTask;
 
 
-
     public SubTask(String name, String description, Status status) {
         super(name, description, status);
         this.typeTask = TypeTask.SUBTASK;
@@ -30,7 +29,7 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId()+ this.startTime + "," + this.duration + "," + this.endTime;
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId() + this.startTime + "," + this.duration + "," + this.endTime;
     }
 }
 

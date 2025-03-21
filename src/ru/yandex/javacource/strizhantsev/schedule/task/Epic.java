@@ -1,8 +1,5 @@
 package ru.yandex.javacource.strizhantsev.schedule.task;
 
-import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
-import ru.yandex.javacource.strizhantsev.schedule.manager.InMemoryTaskManager;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -69,10 +66,8 @@ public class Epic extends Task {
                 .orElse(null);
     }
 
-    // переопределяем метод для получения корректного значения задержки
-
     @Override
     public String toString() {
-        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus()+ "," + this.startTime + "," + this.duration + "," + this.endTime;
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + this.startTime + "," + this.duration + "," + this.endTime;
     }
 }

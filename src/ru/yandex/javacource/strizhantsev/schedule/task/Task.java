@@ -1,12 +1,8 @@
 package ru.yandex.javacource.strizhantsev.schedule.task;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Formatter;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Task {
 

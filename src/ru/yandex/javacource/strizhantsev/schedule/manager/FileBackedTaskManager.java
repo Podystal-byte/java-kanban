@@ -52,7 +52,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 System.out.println("Файл создан.");
             }
 
-            StringBuilder content = new StringBuilder("id,type,name,description,status,epicId,startTime,duration,endTime\n"); // Заголовок
+            StringBuilder content = new StringBuilder("id,type,name,description,status,epicId,startTime,duration,endTime\n");
             for (Task task : getAllTasks()) {
                 content.append(task.toString()).append("\n");
             }
