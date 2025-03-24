@@ -5,7 +5,6 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
