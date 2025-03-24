@@ -3,6 +3,7 @@ package ru.yandex.javacource.strizhantsev.schedule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
+import ru.yandex.javacource.strizhantsev.schedule.manager.IntersectionException;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 
@@ -29,7 +30,7 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     }
 
     @Test
-    public void testSaveAndLoad() throws IOException {
+    public void testSaveAndLoad() throws IOException, IntersectionException {
         Task task = new Task("Task 1", "Description 1", Status.NEW);
         int taskId = taskManager.addTask(task);
 

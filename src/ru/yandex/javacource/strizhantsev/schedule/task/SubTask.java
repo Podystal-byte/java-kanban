@@ -29,7 +29,7 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId() + this.startTime + "," + this.duration + "," + this.endTime;
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getEpicId() + getStartTime() + "," + getDuration() + "," + getEndTime();
     }
 }
 

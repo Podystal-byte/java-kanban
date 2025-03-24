@@ -2,6 +2,7 @@ package ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.javacource.strizhantsev.schedule.manager.IntersectionException;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.task.*;
 
@@ -24,21 +25,21 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testAddTask() throws IOException {
+    public void testAddTask() throws IOException, IntersectionException {
         Task task = new Task("Task 1", "Description 1", Status.NEW);
         taskManager.addTask(task);
         assertNotNull(taskManager.findTaskById(task.getId()), "Задача не была добавлена.");
     }
 
     @Test
-    public void testAddEpic() throws IOException {
+    public void testAddEpic() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         int epicId = taskManager.addEpic(epic);
         assertNotNull(taskManager.findEpicById(epicId), "Эпик не был добавлен.");
     }
 
     @Test
-    public void testAddSubTask() throws IOException {
+    public void testAddSubTask() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         taskManager.addEpic(epic);
         SubTask subTask = new SubTask("SubTask 1", "Description 1", Status.NEW);
@@ -48,7 +49,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testUpdateTaskStatus() throws IOException {
+    public void testUpdateTaskStatus() throws IOException, IntersectionException {
         Task task = new Task("Task 1", "Description 1", Status.NEW);
         int taskId = taskManager.addTask(task);
         task.setStatus(Status.IN_PROGRESS);
@@ -57,7 +58,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testDeleteTask() throws IOException {
+    public void testDeleteTask() throws IOException, IntersectionException {
         Task task = new Task("Task 1", "Description 1", Status.NEW);
         int taskId = taskManager.addTask(task);
         taskManager.removeTaskById(taskId);
@@ -65,7 +66,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testDeleteEpic() throws IOException {
+    public void testDeleteEpic() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         int epicId = taskManager.addEpic(epic);
         taskManager.deleteEpic(epicId);
@@ -73,7 +74,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testDeleteSubTask() throws IOException {
+    public void testDeleteSubTask() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         SubTask subTask = new SubTask("SubTask 1", "Description 1", Status.NEW);
         subTask.setEpicId(epic.getId());
@@ -84,7 +85,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testGetHistory() throws IOException {
+    public void testGetHistory() throws IOException, IntersectionException {
         Task task = new Task("Task 1", "Description 1", Status.NEW);
         int taskId = taskManager.addTask(task);
         taskManager.findTaskById(taskId);
@@ -93,7 +94,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testGetPrioritizedTasks() throws IOException {
+    public void testGetPrioritizedTasks() throws IOException, IntersectionException {
         Task task1 = new Task("Task 1", "Description 1", Status.NEW, LocalDateTime.now(), Duration.ofMinutes(30));
         Task task2 = new Task("Task 2", "Description 2", Status.NEW, LocalDateTime.now().plusHours(1), Duration.ofMinutes(30));
         taskManager.addTask(task1);
@@ -103,7 +104,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     }
 
     @Test
-    public void testValidationTask() throws IOException {
+    public void testValidationTask() throws IOException, IntersectionException {
         Task task1 = new Task("Task 1", "Description 1", Status.NEW, LocalDateTime.now(), Duration.ofMinutes(30));
         Task task2 = new Task("Task 2", "Description 2", Status.NEW, LocalDateTime.now().plusMinutes(15), Duration.ofMinutes(30));
         taskManager.addTask(task1);

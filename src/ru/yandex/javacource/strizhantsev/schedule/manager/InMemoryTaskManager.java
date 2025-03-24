@@ -2,10 +2,7 @@ package ru.yandex.javacource.strizhantsev.schedule.manager;
 
 import ru.yandex.javacource.strizhantsev.schedule.history.HistoryManager;
 import ru.yandex.javacource.strizhantsev.schedule.history.InMemoryHistoryManager;
-import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
-import ru.yandex.javacource.strizhantsev.schedule.task.Status;
-import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
-import ru.yandex.javacource.strizhantsev.schedule.task.Task;
+import ru.yandex.javacource.strizhantsev.schedule.task.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -37,10 +34,10 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int addTask(Task task) throws IOException {
+    public int addTask(Task task) throws IOException, IntersectionException {
         int id = ++generateId;
         task.setId(id);
-        if (validationTask(task)) {
+        if (checkIntersection(task)) {
             sortedSet.add(task);
         }
         tasks.put(id, task);
@@ -48,18 +45,18 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int addEpic(Epic epic) throws IOException {
+    public int addEpic(Epic epic) throws IOException, IntersectionException {
         int epicId = ++generateId;
         epic.setId(epicId);
         epics.put(epicId, epic);
-        if (validationTask(epic)) {
+        if (checkIntersection(epic)) {
             sortedSet.add(epic);
         }
         return epicId;
     }
 
     @Override
-    public Integer addNewSubtask(SubTask subtask) throws IOException {
+    public Integer addNewSubtask(SubTask subtask) throws IOException, IntersectionException {
         int epicId = subtask.getEpicId();
         Epic epic = epics.get(epicId);
         if (epic == null) {
@@ -68,7 +65,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         int id = ++generateId;
         subtask.setId(id);
-        if (validationTask(subtask)) {
+        if (checkIntersection(subtask)) {
             setEpicStartTime(epic);
             setEpicDuration(epic);
             sortedSet.add(subtask);
@@ -142,7 +139,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void updateEpic(Epic epic) {
+    public void updateEpic(Epic epic) throws IntersectionException {
         final Epic savedEpic = epics.get(epic.getId());
         if (savedEpic == null) {
             return;
@@ -151,7 +148,7 @@ public class InMemoryTaskManager implements TaskManager {
         epic.setStatus(savedEpic.getStatus());
         setEpicDuration(savedEpic);
         setEpicStartTime(savedEpic);
-        if (validationTask(epic)) {
+        if (checkIntersection(epic)) {
             sortedSet.add(epic);
         }
         epics.put(epic.getId(), epic);
@@ -314,14 +311,13 @@ public class InMemoryTaskManager implements TaskManager {
         return !(end1.isBefore(start2) || end2.isBefore(start1));
     }
 
-    private boolean validationTask(Task newTask) {
-        if (newTask.getStartTime() == null || newTask.getDuration() == null) {
-            return false;
-        }
-        return sortedSet.stream()
-                .allMatch(task -> isOverlapping(task, newTask));
-    }
+    private boolean checkIntersection(Task newTask) throws IntersectionException {
 
+        boolean hasIntersection =  sortedSet.stream()
+                .anyMatch(task -> isOverlapping(task, newTask));
+        if (hasIntersection)   throw new IntersectionException("Задача пересекается по времени");
+        return hasIntersection;
+    }
 
     @Override
     public List<Task> getHistory() {

@@ -2,6 +2,7 @@ package ru.yandex.javacource.strizhantsev.schedule;
 
 import org.junit.jupiter.api.Test;
 import ru.yandex.javacource.strizhantsev.schedule.manager.InMemoryTaskManager;
+import ru.yandex.javacource.strizhantsev.schedule.manager.IntersectionException;
 import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
 import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
@@ -22,14 +23,14 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     }
 
     @Test
-    public void testEpicStatusAllNew() throws IOException {
+    public void testEpicStatusAllNew() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         taskManager.addEpic(epic);
         assertEquals(Status.NEW, taskManager.findEpicById(epic.getId()).getStatus(), "Статус эпика должен быть NEW.");
     }
 
     @Test
-    public void testEpicStatusAllDone() throws IOException {
+    public void testEpicStatusAllDone() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         int epicId = taskManager.addEpic(epic);
         SubTask subTask1 = new SubTask("SubTask 1", "Description 1", Status.DONE);
@@ -42,7 +43,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     }
 
     @Test
-    public void testEpicStatusNewAndDone() throws IOException {
+    public void testEpicStatusNewAndDone() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         int epicId = taskManager.addEpic(epic);
         SubTask subTask1 = new SubTask("SubTask 1", "Description 1", Status.NEW);
@@ -55,7 +56,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     }
 
     @Test
-    public void testEpicStatusInProgress() throws IOException {
+    public void testEpicStatusInProgress() throws IOException, IntersectionException {
         Epic epic = new Epic("Epic 1", "Description 1", Status.NEW);
         taskManager.addEpic(epic);
         SubTask subTask1 = new SubTask("SubTask 1", "Description 1", Status.IN_PROGRESS);
@@ -68,7 +69,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     }
 
     @Test
-    public void testNoOverlap() throws IOException {
+    public void testNoOverlap() throws IOException, IntersectionException {
         Task task1 = new Task("Task 1", "Description 1", Status.NEW,
                 LocalDateTime.of(2023, 10, 1, 10, 0), Duration.ofHours(1));
 

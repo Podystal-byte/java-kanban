@@ -2,7 +2,4 @@ id,type,name,description,status,epicId,startTime,duration,endTime
 1,TASK,n,d,NEW,2025-07-11T12:20,PT10M,2025-07-11T12:30
 2,TASK,Отправиться на шоппинг,Нужно купить платья, сумку и туфли,NEW,2025-11-11T12:20,PT10M,2025-11-11T12:30
 3,TASK,Вторая задача,Описание второй задачи,NEW,2023-11-11T12:20,PT10M,2023-11-11T12:30
-4,TASK,rrr,dsdsd,NEW,null,null,null
-5,EPIC,Купить продукты,Пойти в магазин,IN_PROGRESS,null,null,null
-6,SUBTASK,Заложить фундамент,Описание подзадачи 2,IN_PROGRESS,52026-01-13T00:05,PT25M,2026-01-13T00:30
-7,SUBTASK,r  ,1    ,NEW,52025-01-02T03:04,PT20M,2025-01-02T03:24
+4,EPIC,Купить продукты,Пойти в магазин,NEW,null,null,null

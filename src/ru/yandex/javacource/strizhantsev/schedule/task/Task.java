@@ -11,9 +11,8 @@ public class Task {
     private String description;
     private Status status;
     private TypeTask typeTask;
-    Duration duration;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    private Duration duration;
+    private LocalDateTime startTime;
 
 
     public Task(String name, String description, Status status) {
@@ -30,7 +29,6 @@ public class Task {
         this.typeTask = TypeTask.TASK;
         this.startTime = startTime;
         this.duration = duration;
-        this.endTime = (startTime != null && duration != null) ? startTime.plus(duration) : null;
     }
 
     public TypeTask getTypeTask() {
@@ -87,16 +85,19 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        return endTime = startTime.plus(duration);
+        if (startTime == null || duration == null) {
+            return null;
+        }
+        return startTime.plus(duration);
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public long getDurationInMinute() {
         long minute = getDuration().toMinutes();
         return minute;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     @Override
@@ -118,7 +119,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + typeTask + "," + name + "," + description + "," + status + "," + startTime + "," + duration + "," + endTime;
+        return id + "," + typeTask + "," + name + "," + description + "," + status + "," + startTime + "," + duration + "," + getEndTime();
     }
 }
 

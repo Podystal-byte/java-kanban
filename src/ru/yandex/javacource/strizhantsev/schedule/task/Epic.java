@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Epic extends Task {
     private List<Integer> subtaskIds = new ArrayList<>();
     private TypeTask typeTask;
+    private LocalDateTime endTime;
 
 
     public Epic(String name, String description, Status status) {
@@ -41,11 +42,12 @@ public class Epic extends Task {
         subtaskIds.clear();
     }
 
+
+
     public void updateTime(List<SubTask> subtasks) {
         if (subtasks.isEmpty()) {
-            this.setStartTime(null);
-            this.duration = Duration.ZERO;
-            this.startTime = null;
+            setDuration(Duration.ZERO);
+            setStartTime(null);
             return;
         }
 
@@ -55,10 +57,9 @@ public class Epic extends Task {
                 .min(LocalDateTime::compareTo)
                 .orElse(null));
 
-        this.duration = subtasks.stream()
+        setDuration( subtasks.stream()
                 .map(SubTask::getDuration)
-                .reduce(Duration.ZERO, Duration::plus);
-
+                .reduce(Duration.ZERO, Duration::plus));
         this.endTime = subtasks.stream()
                 .map(SubTask::getEndTime)
                 .filter(Objects::nonNull)
@@ -68,6 +69,6 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + this.startTime + "," + this.duration + "," + this.endTime;
+        return getId() + "," + typeTask + "," + getName() + "," + getDescription() + "," + getStatus() + "," + getStartTime() + "," + getStartTime() + "," + this.endTime;
     }
 }

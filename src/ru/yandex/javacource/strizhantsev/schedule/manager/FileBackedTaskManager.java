@@ -24,21 +24,21 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public int addTask(Task task) throws IOException {
+    public int addTask(Task task) throws IOException, IntersectionException {
         super.addTask(task);
         save();
         return task.getId();
     }
 
     @Override
-    public int addEpic(Epic epic) throws IOException {
+    public int addEpic(Epic epic) throws IOException, IntersectionException {
         super.addEpic(epic);
         save();
         return epic.getId();
     }
 
     @Override
-    public Integer addNewSubtask(SubTask subtask) throws IOException {
+    public Integer addNewSubtask(SubTask subtask) throws IOException, IntersectionException {
         super.addNewSubtask(subtask);
         save();
         return subtask.getId();
@@ -131,7 +131,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | IntersectionException e) {
             throw new ManagerSaveException("Ошибка при чтении файла");
         }
         return manager;

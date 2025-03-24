@@ -19,7 +19,7 @@ public class Main {
         Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW, LocalDateTime.of(2025, 11, 11, 12, 20), Duration.ofMinutes(10));
         Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW, LocalDateTime.of(2023, 11, 11, 12, 20), Duration.ofMinutes(10));
         Task task216 = new Task("n", "d", Status.NEW, LocalDateTime.of(2025, 7, 11, 12, 20), Duration.ofMinutes(10));
-        Task task3 = new Task("rrr", "dsdsd", Status.NEW);
+
 
         Epic epic1 = new Epic("Купить продукты", "Пойти в магазин", Status.NEW);
 
@@ -29,12 +29,14 @@ public class Main {
         taskManager.addTask(task216);
         taskManager.addTask(task1);
         taskManager.addTask(task2);
-        taskManager.addTask(task3);
 
-        taskManager.addEpic(epic1);
+
+
 
         subTask3.setEpicId(epic1.getId());
         subTask4.setEpicId(epic1.getId());
+
+        taskManager.addEpic(epic1);
 
         taskManager.addNewSubtask(subTask3);
         taskManager.addNewSubtask(subTask4);
