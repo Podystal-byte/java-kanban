@@ -43,7 +43,6 @@ public class Epic extends Task {
     }
 
 
-
     public void updateTime(List<SubTask> subtasks) {
         if (subtasks.isEmpty()) {
             setDuration(Duration.ZERO);
@@ -56,8 +55,7 @@ public class Epic extends Task {
                 .filter(Objects::nonNull)
                 .min(LocalDateTime::compareTo)
                 .orElse(null));
-
-        setDuration( subtasks.stream()
+        setDuration(subtasks.stream()
                 .map(SubTask::getDuration)
                 .reduce(Duration.ZERO, Duration::plus));
         this.endTime = subtasks.stream()

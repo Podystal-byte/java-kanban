@@ -313,9 +313,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     private boolean checkIntersection(Task newTask) throws IntersectionException {
 
-        boolean hasIntersection =  sortedSet.stream()
+        boolean hasIntersection = sortedSet.stream()
                 .anyMatch(task -> isOverlapping(task, newTask));
-        if (hasIntersection)   throw new IntersectionException("Задача пересекается по времени");
+        if (hasIntersection) throw new IntersectionException("Задача пересекается по времени");
         return hasIntersection;
     }
 
