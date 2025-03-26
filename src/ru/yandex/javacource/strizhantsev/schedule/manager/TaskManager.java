@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 public interface TaskManager {
-    int addTask(Task task) throws IOException;
+    int addTask(Task task) throws IOException, IntersectionException;
 
-    int addEpic(Epic epic) throws IOException;
+    int addEpic(Epic epic) throws IOException, IntersectionException;
 
-    Integer addNewSubtask(SubTask subtask) throws IOException;
+    Integer addNewSubtask(SubTask subtask) throws IOException, IntersectionException;
 
     List<Task> getAllTasks();
 
@@ -30,7 +30,7 @@ public interface TaskManager {
 
     void updateTask(Task task);
 
-    void updateEpic(Epic epic);
+    void updateEpic(Epic epic) throws IntersectionException;
 
     void updateSubtask(SubTask subtask);
 
@@ -49,4 +49,6 @@ public interface TaskManager {
     void deleteAllEpics();
 
     List<Task> getHistory();
+
+    List<Task> getPrioritizedTasks();
 }

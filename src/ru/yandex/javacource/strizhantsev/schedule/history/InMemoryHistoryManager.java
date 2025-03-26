@@ -15,12 +15,14 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void add(Task task) {
         try {
+            if (history.containsKey(task.getId())) {
+                remove(task.getId());
+            }
             linkLast(task);
             history.put(task.getId(), tail);
         } catch (NullPointerException e) {
             System.out.println("Пытаетесь добавить пустую задачу");
         }
-
     }
 
     private void linkLast(Task task) {
@@ -68,6 +70,9 @@ public class InMemoryHistoryManager implements HistoryManager {
         } else {
             tail = prevNode;
         }
+
+        node.prev = null;
+        node.next = null;
     }
 
     public static class Node {

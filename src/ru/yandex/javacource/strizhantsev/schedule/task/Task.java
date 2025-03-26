@@ -1,5 +1,7 @@
 package ru.yandex.javacource.strizhantsev.schedule.task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
@@ -9,13 +11,24 @@ public class Task {
     private String description;
     private Status status;
     private TypeTask typeTask;
+    private Duration duration;
+    private LocalDateTime startTime;
+
 
     public Task(String name, String description, Status status) {
-
         this.name = name;
         this.description = description;
         this.status = status;
         this.typeTask = TypeTask.TASK;
+    }
+
+    public Task(String name, String description, Status status, LocalDateTime startTime, Duration duration) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.typeTask = TypeTask.TASK;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public TypeTask getTypeTask() {
@@ -55,6 +68,38 @@ public class Task {
         this.status = status;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long minDur) {
+        this.duration = Duration.ofMinutes(minDur);
+    }
+
+    public LocalDateTime getEndTime() {
+        if (startTime == null || duration == null) {
+            return null;
+        }
+        return startTime.plus(duration);
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public long getDurationInMinute() {
+        long minute = getDuration().toMinutes();
+        return minute;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -74,7 +119,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + typeTask + "," + name + "," + description + "," + status;
+        return id + "," + typeTask + "," + name + "," + description + "," + status + "," + startTime + "," + duration + "," + getEndTime();
     }
 }
 

@@ -1,0 +1,5 @@
+id,type,name,description,status,epicId,startTime,duration,endTime
+1,TASK,n,d,NEW,2025-07-11T12:20,PT10M,2025-07-11T12:30
+2,TASK,Отправиться на шоппинг,Нужно купить платья, сумку и туфли,NEW,2025-11-11T12:20,PT10M,2025-11-11T12:30
+3,TASK,Вторая задача,Описание второй задачи,NEW,2023-11-11T12:20,PT10M,2023-11-11T12:30
+4,EPIC,Купить продукты,Пойти в магазин,NEW,null,null,null

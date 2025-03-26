@@ -1,6 +1,5 @@
 package ru.yandex.javacource.strizhantsev.schedule;
 
-import ru.yandex.javacource.strizhantsev.schedule.manager.FileBackedTaskManager;
 import ru.yandex.javacource.strizhantsev.schedule.manager.Managers;
 import ru.yandex.javacource.strizhantsev.schedule.task.Task;
 import ru.yandex.javacource.strizhantsev.schedule.task.SubTask;
@@ -8,64 +7,43 @@ import ru.yandex.javacource.strizhantsev.schedule.task.Epic;
 import ru.yandex.javacource.strizhantsev.schedule.task.Status;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        //TaskManager taskManager = Managers.getFileBacked();
+        TaskManager taskManager = Managers.getFileBacked();
 
-        FileBackedTaskManager taskManager = Managers.getFileBacked();
-        Path filePath = Paths.get(FileBackedTaskManager.FILE_PATH);
-        File file = filePath.toFile();
-
-        FileBackedTaskManager.loadFromFile(file);
-
-        printAllTasks(FileBackedTaskManager.loadFromFile(file));
-
-
-
-        Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW);
-        Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW);
-        Task task217 = new Task("name", "descr", Status.NEW);
-        Task task216 = new Task("n", "d", Status.NEW);
+        Task task1 = new Task("Отправиться на шоппинг", "Нужно купить платья, сумку и туфли", Status.NEW, LocalDateTime.of(2025, 11, 11, 12, 20), Duration.ofMinutes(10));
+        Task task2 = new Task("Вторая задача", "Описание второй задачи", Status.NEW, LocalDateTime.of(2023, 11, 11, 12, 20), Duration.ofMinutes(10));
+        Task task216 = new Task("n", "d", Status.NEW, LocalDateTime.of(2025, 7, 11, 12, 20), Duration.ofMinutes(10));
 
 
         Epic epic1 = new Epic("Купить продукты", "Пойти в магазин", Status.NEW);
-        Epic epic2 = new Epic("Построить дом", "Описание эпик 2", Status.NEW);
 
-
-        SubTask subTask2 = new SubTask("Лук", "купить лук", Status.IN_PROGRESS);
-        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS);
-        SubTask subTask4 = new SubTask("r  ", "1    ", Status.NEW);
+        SubTask subTask3 = new SubTask("Заложить фундамент", "Описание подзадачи 2", Status.IN_PROGRESS, LocalDateTime.of(2026, 1, 13, 0, 5), Duration.ofMinutes(25));
+        SubTask subTask4 = new SubTask("r  ", "1    ", Status.NEW, LocalDateTime.of(2025, 1, 2, 3, 4), Duration.ofMinutes(20));
 
         taskManager.addTask(task216);
         taskManager.addTask(task1);
         taskManager.addTask(task2);
 
+
+
+
+        subTask3.setEpicId(epic1.getId());
+        subTask4.setEpicId(epic1.getId());
+
         taskManager.addEpic(epic1);
-        taskManager.addEpic(epic2);
 
-        taskManager.addTask(task217);
-
-
-        subTask2.setEpicId(epic1.getId());
-        subTask3.setEpicId(epic2.getId());
-        subTask4.setEpicId(epic2.getId());
-
-
-        taskManager.addNewSubtask(subTask2);
         taskManager.addNewSubtask(subTask3);
         taskManager.addNewSubtask(subTask4);
 
-        taskManager.findTaskById(1);
-        taskManager.findTaskById(2);
-        taskManager.findSubTaskById(7);
-        taskManager.findSubTaskById(8);
 
+        System.out.println("-------------------------------------------------------");
+        System.out.println(taskManager.getPrioritizedTasks());
 
 
     }
