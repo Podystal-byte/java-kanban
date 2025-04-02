@@ -1,6 +1,5 @@
 package ru.yandex.javacource.strizhantsev.schedule.server.handlers;
 
-import com.google.gson.JsonSyntaxException;
 import com.sun.net.httpserver.HttpExchange;
 import ru.yandex.javacource.strizhantsev.schedule.manager.IntersectionException;
 import ru.yandex.javacource.strizhantsev.schedule.manager.TaskManager;
