@@ -23,9 +23,9 @@ public class TasksHandler extends BaseHttpHandler {
             String[] pathParts = path.split("/");
 
             switch (method) {
-                case "GET" -> handleGet(exchange, pathParts);
-                case "POST" -> handlePost(exchange);
-                case "DELETE" -> handleDelete(exchange, pathParts);
+                case GET_STATUS -> handleGet(exchange, pathParts);
+                case POST_STATUS -> handlePost(exchange);
+                case DELETE_STATUS -> handleDelete(exchange, pathParts);
                 default -> sendNotFound(exchange);
             }
         } catch (Exception e) {

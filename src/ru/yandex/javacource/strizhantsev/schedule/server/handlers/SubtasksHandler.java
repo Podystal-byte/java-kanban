@@ -23,13 +23,13 @@ public class SubtasksHandler extends BaseHttpHandler {
             String[] pathParts = path.split("/");
 
             switch (method) {
-                case "GET":
+                case GET_STATUS:
                     handleGet(exchange, pathParts);
                     break;
-                case "POST":
+                case POST_STATUS:
                     handlePost(exchange);
                     break;
-                case "DELETE":
+                case DELETE_STATUS:
                     handleDelete(exchange, pathParts);
                     break;
                 default:

@@ -12,6 +12,9 @@ import java.time.*;
 
 public abstract class BaseHttpHandler implements HttpHandler {
     protected final Gson gson;
+    protected static final String GET_STATUS = "GET";
+    protected static final String POST_STATUS = "POST";
+    protected static final String DELETE_STATUS = "DELETE";
 
     public BaseHttpHandler() {
         this.gson = new GsonBuilder()
@@ -22,45 +25,6 @@ public abstract class BaseHttpHandler implements HttpHandler {
                 .create();
     }
 
-    private static class DurationAdapter extends TypeAdapter<Duration> {
-        @Override
-        public void write(JsonWriter out, Duration value) throws IOException {
-            if (value == null) {
-                out.nullValue();
-            } else {
-                out.value(value.toMinutes());
-            }
-        }
-
-        @Override
-        public Duration read(JsonReader in) throws IOException {
-            if (in.peek() == JsonToken.NULL) {
-                in.nextNull();
-                return null;
-            }
-            return Duration.ofMinutes(in.nextLong());
-        }
-    }
-
-    private static class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
-        @Override
-        public void write(JsonWriter out, LocalDateTime value) throws IOException {
-            if (value == null) {
-                out.nullValue();
-            } else {
-                out.value(value.toString());
-            }
-        }
-
-        @Override
-        public LocalDateTime read(JsonReader in) throws IOException {
-            if (in.peek() == JsonToken.NULL) {
-                in.nextNull();
-                return null;
-            }
-            return LocalDateTime.parse(in.nextString());
-        }
-    }
 
     @Override
     public abstract void handle(HttpExchange exchange) throws IOException;
